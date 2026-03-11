@@ -12,6 +12,10 @@ dotenv.config(); // fallback for when .env is placed directly in backend/
 const app = express();
 const PORT = parseInt(process.env.PORT || '8000', 10);
 
+// Trust first proxy (Render, Railway, Heroku, etc.) so express-rate-limit
+// correctly reads client IPs from X-Forwarded-For
+app.set('trust proxy', 1);
+
 // Body parsing (JSON/urlencoded for non-file routes)
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
