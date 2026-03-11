@@ -153,7 +153,13 @@ uploadRouter.post(
       });
     } catch (err) {
       console.error('[upload] Error:', err);
-      const message = err instanceof Error ? err.message : 'An unexpected error occurred.';
+      let message = 'An unexpected error occurred.';
+      if (err instanceof Error) {
+        message = err.message;
+      } else if (typeof err === 'object' && err !== null) {
+        const e = err as { text?: string; message?: string; status?: number };
+        message = e.message ?? e.text ?? JSON.stringify(err);
+      }
       res.status(500).json({ success: false, error: message });
     }
   },

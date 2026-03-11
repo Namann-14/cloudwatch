@@ -21,21 +21,28 @@ export async function sendSummaryEmail(
   // Convert markdown **bold** to plain text for EmailJS template
   const plainSummary = summary.replace(/\*\*(.+?)\*\*/g, '$1');
 
-  const response = await emailjs.send(
-    serviceId,
-    templateId,
-    {
-      to_email: recipientEmail,
-      summary: plainSummary,
-      month_year: monthYear,
-    },
-    {
-      publicKey,
-      privateKey,
-    },
-  );
+  try {
+    const response = await emailjs.send(
+      serviceId,
+      templateId,
+      {
+        to_email: recipientEmail,
+        summary: plainSummary,
+        month_year: monthYear,
+      },
+      {
+        publicKey,
+        privateKey,
+      },
+    );
 
-  if (response.status !== 200) {
-    throw new Error(`Email delivery failed: ${response.text}`);
+    if (response.status !== 200) {
+      throw new Error(`Email delivery failed (${response.status}): ${response.text}`);
+    }
+  } catch (err) {
+    // EmailJS rejects with a plain {status, text} object, not an Error instance
+    if (err instanceof Error) throw err;
+    const e = err as { status?: number; text?: string };
+    throw new Error(`Email delivery failed (${e.status ?? 'unknown'}): ${e.text ?? JSON.stringify(err)}`);
   }
 }
