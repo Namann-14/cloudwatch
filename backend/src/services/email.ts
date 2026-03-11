@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 function buildHtmlEmail(summary: string): string {
   // Convert markdown-style **bold** to <strong> for email rendering
@@ -74,21 +74,23 @@ export async function sendSummaryEmail(
   recipientEmail: string,
   summary: string,
 ): Promise<void> {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: process.env.SMTP_SECURE === 'true',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY is not configured.');
+  }
 
-  await transporter.sendMail({
-    from: `"CloudWatch – Sales Insights" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
-    to: recipientEmail,
+  const resend = new Resend(apiKey);
+  const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+
+  const { error } = await resend.emails.send({
+    from: `CloudWatch – Sales Insights <${from}>`,
+    to: [recipientEmail],
     subject: `Your AI Sales Summary – ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`,
     html: buildHtmlEmail(summary),
-    text: summary, // plain-text fallback
+    text: summary,
   });
+
+  if (error) {
+    throw new Error(`Email delivery failed: ${error.message}`);
+  }
 }

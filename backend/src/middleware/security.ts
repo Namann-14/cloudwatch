@@ -8,7 +8,7 @@ export const setupSecurity = (app: Express): void => {
   app.use(helmet());
 
   // 2. CORS — only allow the configured frontend origin
-  const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
+  const allowedOrigin = (process.env.CORS_ORIGIN || 'http://localhost:3000').replace(/\/$/, '');
   app.use(
     cors({
       origin: allowedOrigin,
