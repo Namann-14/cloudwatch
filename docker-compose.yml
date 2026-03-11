@@ -24,6 +24,7 @@ services:
       - '3000:3000'
     environment:
       NODE_ENV: production
+      HOSTNAME: 0.0.0.0
       NEXT_PUBLIC_API_URL: http://localhost:8000
     depends_on:
       backend:
