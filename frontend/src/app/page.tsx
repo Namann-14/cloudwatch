@@ -10,7 +10,7 @@ export default function Home() {
             R
           </div>
           <span className="font-semibold text-foreground text-lg tracking-tight">
-            Rabbitt AI
+            CloudWatch
           </span>
           <span className="ml-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-medium">
             Sales Insight Automator
@@ -56,7 +56,7 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-border py-5 text-center text-muted-foreground text-sm">
-        © {new Date().getFullYear()} Rabbitt AI — Sales Insight Automator
+        © {new Date().getFullYear()} CloudWatch — Sales Insight Automator
       </footer>
     </main>
   );

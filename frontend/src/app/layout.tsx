@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Sales Insight Automator | Rabbitt AI',
+  title: 'Sales Insight Automator | CloudWatch',
   description:
     'Upload your sales data and receive an AI-generated executive summary directly in your inbox.',
 };

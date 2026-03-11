@@ -9,15 +9,19 @@ const options: swaggerJsdoc.Options = {
       title: 'Sales Insight Automator API',
       version: '1.0.0',
       description:
-        'Upload a CSV/XLSX sales file and receive an AI-generated executive summary via email. Built for Rabbitt AI.',
+        'Upload a CSV/XLSX sales file and receive an AI-generated executive summary via email. Built for CloudWatch.',
       contact: {
-        name: 'Rabbitt AI',
+        name: 'CloudWatch',
       },
     },
     servers: [
       {
+        url: 'https://cloudwatch-bc43.onrender.com',
+        description: 'Production server',
+      },
+      {
         url: `http://localhost:${process.env.PORT || 8000}`,
-        description: 'Development server',
+        description: 'Local development server',
       },
     ],
     components: {

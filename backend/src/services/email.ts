@@ -12,7 +12,7 @@ function buildHtmlEmail(summary: string): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sales Insight Report – Rabbitt AI</title>
+  <title>Sales Insight Report – CloudWatch</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f4f7;font-family:Arial,Helvetica,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:40px 0;">
@@ -23,7 +23,7 @@ function buildHtmlEmail(summary: string): string {
           <tr>
             <td style="background:#0f172a;padding:28px 36px;">
               <h1 style="margin:0;color:#ffffff;font-size:22px;letter-spacing:0.5px;">
-                Rabbitt AI
+                CloudWatch
               </h1>
               <p style="margin:4px 0 0;color:#94a3b8;font-size:13px;">
                 Sales Insight Automator
@@ -85,7 +85,7 @@ export async function sendSummaryEmail(
   });
 
   await transporter.sendMail({
-    from: `"Rabbitt AI – Sales Insights" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+    from: `"CloudWatch – Sales Insights" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
     to: recipientEmail,
     subject: `Your AI Sales Summary – ${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`,
     html: buildHtmlEmail(summary),

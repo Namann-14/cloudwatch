@@ -1,7 +1,11 @@
 # Sales Insight Automator
 
-> **Rabbitt AI — AI Cloud DevOps Engineer Assignment**
+### *Own Your Data Pipeline. Own Your AI.*
+
+> **CloudWatch — AI Cloud DevOps Engineer Assignment**
 > A secure, containerised tool that transforms raw sales CSV/Excel data into AI-generated executive summaries delivered straight to your inbox.
+>
+> Built on the belief that every company deserves to become an AI company — without surrendering ownership of its data or its intelligence.
 
 ---
 
@@ -9,8 +13,8 @@
 
 | Service | URL |
 |---|---|
-| Frontend | _Add your Vercel URL here_ |
-| Swagger / API Docs | _Add your Render URL_ `/api-docs` |
+| Frontend | https://cloudwatch-ai.vercel.app |
+| Swagger / API Docs | https://cloudwatch-bc43.onrender.com/api-docs |
 
 ---
 
@@ -31,7 +35,11 @@
 
 ## Overview
 
-The sales team at Rabbitt AI deals with large quarterly CSV/Excel files that are difficult to distil into leadership-ready summaries. This tool solves that in three steps:
+At CloudWatch, the goal is simple: enable every company to become an AI company — as the landlords of their own intelligence, not tenants renting it from someone else. This tool is a direct expression of that philosophy.
+
+The sales team deals with large quarterly CSV/Excel files that are difficult to distil into leadership-ready summaries. Rather than shipping data to an opaque third-party dashboard, the Sales Insight Automator keeps the pipeline lean, self-contained, and in your hands — because big is no longer beautiful; precise and purposeful is.
+
+The flow is three steps:
 
 1. **Upload** — A team member uploads a `.csv` or `.xlsx` sales file via the SPA.
 2. **Analyse** — The backend parses the data and sends it to **Gemini 2.5 Flash**, which produces a professional executive narrative.
@@ -55,10 +63,10 @@ The sales team at Rabbitt AI deals with large quarterly CSV/Excel files that are
 │  Security layer : Helmet · CORS · Rate Limiter               │
 │  Validation     : Multer (file) · express-validator (email)  │
 │                                                              │
-│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐  │
-│   │  Parser  │───▶│  Gemini 2.5      │───▶│  Nodemailer  │  │
-│   │ (SheetJS)│    │  Flash (LLM)     │    │  (SMTP)      │  │
-│   └──────────┘    └──────────────────┘    └──────────────┘  │
+│   ┌──────────┐    ┌──────────────────┐    ┌──────────────┐   │
+│   │  Parser  │──▶│  Gemini 2.5       │──▶│  Nodemailer  │   │
+│   │ (SheetJS)│    │  Flash (LLM)     │    │  (SMTP)      │   │
+│   └──────────┘    └──────────────────┘    └──────────────┘   │
 └──────────────────────────────────────────────────────────────┘
 ```
 
